@@ -20,15 +20,6 @@ class EmployeeController extends Controller
         return $employees->toJson();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,11 +29,11 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'name' => 'required|max:30|min:5',
-        //     'address' => 'required|max:20|min:5',
-        //     'phone' => 'required|max:15|numeric|min:5'
-        // ]);
+        $validated = $request->validate([
+            'name' => 'required|max:30|min:5',
+            'address' => 'required|max:20|min:5',
+            'phone' => 'required|numeric'
+        ]);
         $record = new Employee;
 
         $record->name = $request->get('name');
@@ -54,7 +45,6 @@ class EmployeeController extends Controller
         $record->hire_date = $request->get('hire_date');
 
         $record->save();
-
     }
 
     /**
@@ -69,17 +59,6 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -88,11 +67,11 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $validated = $request->validate([
-        //     'name' => 'required|max:30|min:5',
-        //     'address' => 'required|max:20|min:5',
-        //     'phone' => 'required|max:15|numeric|min:5'
-        // ]);
+        $validated = $request->validate([
+            'name' => 'required|max:30|min:5',
+            'address' => 'required|max:20|min:5',
+            'phone' => 'required|max:15|numeric|min:5'
+        ]);
 
         $record = Employee::find($id);
 

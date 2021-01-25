@@ -14,13 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('employee');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('employee', 'App\Http\Controllers\EmployeeController')->middleware('auth');
+Route::get('/employee', 'App\Http\Controllers\EmployeeController@index')->name('employee.index')->middleware('auth');
+Route::get('/employee/create', 'App\Http\Controllers\EmployeeController@create')->name('employee.create')->middleware('auth');
+Route::get('/employee/{id}/edit', 'App\Http\Controllers\EmployeeController@index')->name('employee.edit')->middleware('auth');
 
 Route::prefix('api')->middleware('auth')->group(function () {
     Route::get('/employees/index', 'App\Http\Controllers\Api\EmployeeController@index')->name('api.employees.index');

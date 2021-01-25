@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form @submit.prevent="update">
+                    <form @submit.prevent="updateEmployee">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
@@ -175,7 +175,7 @@ export default {
         this.get();
     },
     methods: {
-        update() {
+        updateEmployee() {
             this.form.patch(route("api.employees.update", 2)).then(response => {
                 this.get();
                 Swal.fire("Success", "Employee data was updated!", "success");

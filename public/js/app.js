@@ -2000,6 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2017,9 +2018,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     store: function store() {
+      var _this = this;
+
       this.form.post(route("api.employees.store")).then(function (response) {
         Swal.fire("Success", "New employee was created!", "success");
       })["catch"](function (response) {
+        console.log(_this.form.errors.all());
         Swal.fire("Fail", "New employee not created!", "error");
       });
     }
@@ -2216,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
     this.get();
   },
   methods: {
-    update: function update() {
+    updateEmployee: function updateEmployee() {
       var _this = this;
 
       this.form.patch(route("api.employees.update", 2)).then(function (response) {
@@ -2406,6 +2410,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2422,7 +2430,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(route("api.employees.index")).then(function (response) {
         var results = response.data;
         _this.tableData = results;
-        console.log(results);
       });
     },
     deleteRecord: function deleteRecord(id) {
@@ -3865,6 +3872,9 @@ var render = function() {
                 submit: function($event) {
                   $event.preventDefault()
                   return _vm.store($event)
+                },
+                keydown: function($event) {
+                  return _vm.form.errors.clear($event.target.name)
                 }
               }
             },
@@ -4283,7 +4293,7 @@ var render = function() {
               on: {
                 submit: function($event) {
                   $event.preventDefault()
-                  return _vm.update($event)
+                  return _vm.updateEmployee($event)
                 }
               }
             },
@@ -4740,7 +4750,99 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "flex items-center" }, [
     _c("table", { staticClass: "min-w-full divide-y divide-gray-200" }, [
-      _vm._m(0),
+      _c("thead", { staticClass: "bg-gray-50" }, [
+        _c("tr", [
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Name\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Address\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Phone\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Department\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Position\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Salary\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Hired\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass:
+                "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("\n                    Actions\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass:
+                "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+              attrs: { href: _vm.route("employee.create") }
+            },
+            [_vm._v("Create")]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "tbody",
@@ -4866,96 +4968,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "bg-gray-50" }, [
-      _c("tr", [
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Name\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Address\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Phone\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Department\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Position\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Salary\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Hired\n                ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          {
-            staticClass:
-              "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider",
-            attrs: { scope: "col" }
-          },
-          [_vm._v("\n                    Actions\n                ")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

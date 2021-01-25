@@ -51,6 +51,11 @@
                     >
                         Actions
                     </th>
+                    <a
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            :href="route('employee.create')"
+                            >Create</a
+                        >
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -105,13 +110,12 @@
                         >
                         <button
                             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            v-on:click="deleteRecord(item.id)">
+                            @click="deleteRecord(item.id)">
                             Delete</button
                         >
                     </td>
                 </tr>
-
-                <!-- More items... -->
+                
             </tbody>
         </table>
     </div>
@@ -133,7 +137,6 @@ export default {
             axios.get(route("api.employees.index")).then(response => {
                 const results = response.data;
                 this.tableData = results;
-                console.log(results);
             });
         },
 
