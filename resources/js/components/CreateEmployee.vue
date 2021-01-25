@@ -14,7 +14,10 @@
                     </div>
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form @submit.prevent="store" @keydown="form.errors.clear($event.target.name);">
+                    <form
+                        @submit.prevent="store"
+                        @keydown="form.errors.clear($event.target.name)"
+                    >
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
@@ -32,7 +35,11 @@
                                             autocomplete="given-name"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                         />
-                                        <!-- <p class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" v-if="this.form.errors.has('name')">{{this.form.errors.get('name') }}</p> -->
+                                        <div
+                                            class="text-red-500"
+                                            v-if="form.errors.has('name')"
+                                            v-text="form.errors.get('name')[0]"
+                                        ></div>
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
@@ -49,7 +56,13 @@
                                             autocomplete="phone"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                         />
+                                        <div
+                                            class="text-red-500"
+                                            v-if="form.errors.has('phone')"
+                                            v-text="form.errors.get('phone')[0]">
+                                        </div>
                                     </div>
+                                    
 
                                     <div class="col-span-6">
                                         <label
@@ -65,7 +78,13 @@
                                             autocomplete="street-address"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                         />
+                                        <div
+                                            class="text-red-500"
+                                            v-if="form.errors.has('address')"
+                                            v-text="form.errors.get('address')[0]">
+                                        </div>
                                     </div>
+                                    
 
                                     <div
                                         class="col-span-6 sm:col-span-6 lg:col-span-2"
@@ -166,18 +185,22 @@ export default {
                 department: "",
                 position: "",
                 hire_date: ""
-            }),
+            })
         };
     },
     methods: {
         store() {
             this.form
                 .post(route("api.employees.store"))
-                .then((response) => {
-                    Swal.fire("Success", "New employee was created!", "success");
+                .then(response => {
+                    Swal.fire(
+                        "Success",
+                        "New employee was created!",
+                        "success"
+                    );
+                     window.location.href = route('employee.index');
                 })
-                .catch((response) => {
-                    console.log(this.form.errors.all());
+                .catch(response => {
                     Swal.fire("Fail", "New employee not created!", "error");
                 });
         }

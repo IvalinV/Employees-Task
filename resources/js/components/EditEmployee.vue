@@ -167,7 +167,7 @@ export default {
                 position: "",
                 hire_date: ""
             }),
-            id: 2,
+            id: "",
             record: Object
         };
     },
@@ -176,7 +176,7 @@ export default {
     },
     methods: {
         updateEmployee() {
-            this.form.patch(route("api.employees.update", 2)).then(response => {
+            this.form.patch(route("api.employees.update", this.employeeId)).then(response => {
                 this.get();
                 Swal.fire("Success", "Employee data was updated!", "success");
             });

@@ -2001,6 +2001,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2018,12 +2037,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     store: function store() {
-      var _this = this;
-
       this.form.post(route("api.employees.store")).then(function (response) {
         Swal.fire("Success", "New employee was created!", "success");
+        window.location.href = route('employee.index');
       })["catch"](function (response) {
-        console.log(_this.form.errors.all());
         Swal.fire("Fail", "New employee not created!", "error");
       });
     }
@@ -2212,7 +2229,7 @@ __webpack_require__.r(__webpack_exports__);
         position: "",
         hire_date: ""
       }),
-      id: 2,
+      id: "",
       record: Object
     };
   },
@@ -2223,7 +2240,7 @@ __webpack_require__.r(__webpack_exports__);
     updateEmployee: function updateEmployee() {
       var _this = this;
 
-      this.form.patch(route("api.employees.update", 2)).then(function (response) {
+      this.form.patch(route("api.employees.update", this.employeeId)).then(function (response) {
         _this.get();
 
         Swal.fire("Success", "Employee data was updated!", "success");
@@ -3922,7 +3939,18 @@ var render = function() {
                               _vm.$set(_vm.form, "name", $event.target.value)
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.form.errors.has("name")
+                          ? _c("div", {
+                              staticClass: "text-red-500",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.form.errors.get("name")[0]
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-span-6 sm:col-span-3" }, [
@@ -3962,7 +3990,18 @@ var render = function() {
                               _vm.$set(_vm.form, "phone", $event.target.value)
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.form.errors.has("phone")
+                          ? _c("div", {
+                              staticClass: "text-red-500",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.form.errors.get("phone")[0]
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-span-6" }, [
@@ -4002,7 +4041,18 @@ var render = function() {
                               _vm.$set(_vm.form, "address", $event.target.value)
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.form.errors.has("address")
+                          ? _c("div", {
+                              staticClass: "text-red-500",
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.form.errors.get("address")[0]
+                                )
+                              }
+                            })
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c(

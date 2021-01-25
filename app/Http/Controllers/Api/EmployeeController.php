@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:30|min:5',
-            'address' => 'required|max:20|min:5',
+            'address' => 'required|max:50|min:5',
             'phone' => 'required|numeric'
         ]);
         $record = new Employee;
@@ -69,8 +69,8 @@ class EmployeeController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:30|min:5',
-            'address' => 'required|max:20|min:5',
-            'phone' => 'required|max:15|numeric|min:5'
+            'address' => 'required|max:50|min:5',
+            'phone' => 'required|numeric'
         ]);
 
         $record = Employee::find($id);
